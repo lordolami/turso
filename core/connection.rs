@@ -2274,14 +2274,23 @@ impl Connection {
                         Ok(IOResult::Done(()))
                     })
                     .err()
+            } else if self.get_sync_mode() == SyncMode::Full && wal.is_dirty() {
+                let synced = wal
+                    .sync(pager.get_sync_type())
+                    .and_then(|c| pager.io.wait_for_completion(c));
+                if let Err(err) = &synced {
+                    assert!(
+                        self.get_data_sync_retry(),
+                        "fsync error (data_sync_retry=off): {err:?}"
+                    );
+                }
+                synced.err()
             } else {
                 None
             };
 
             self.auto_commit.store(true, Ordering::SeqCst);
             self.set_tx_state(TransactionState::None);
-            wal.end_write_tx();
-            wal.end_read_tx();
 
             if !force_commit {
                 // remove all non-commited changes in case if WAL session left some suffix without commit frame
@@ -2292,6 +2301,8 @@ impl Connection {
                 }
                 pager.rollback(false, self, true);
             }
+            wal.end_write_tx();
+            wal.end_read_tx();
             if let Some(err) = commit_err {
                 return Err(err);
             }
