@@ -2349,6 +2349,7 @@ impl Schema {
                 BTreeTable::build_logical_to_physical_map(&cols, &[], true);
             let table = Arc::new(Table::BTree(Arc::new(BTreeTable {
                 name: view_name.clone(),
+                original_name: view_name.clone(),
                 root_page: main_root,
                 columns: cols,
                 primary_key_columns: vec![],
@@ -3163,6 +3164,7 @@ impl TryClone for BTreeTable {
         Ok(Self {
             root_page: self.root_page,
             name: self.name.clone(),
+            original_name: self.original_name.clone(),
             primary_key_columns: self.primary_key_columns.try_clone()?,
             primary_key_is_inline: self.primary_key_is_inline,
             columns: self.columns.try_clone()?,
@@ -3779,6 +3781,8 @@ impl GeneratedColGraph {
 pub struct BTreeTable {
     pub root_page: i64,
     pub name: String,
+    /// The name with the case used in CREATE TABLE. `name` is lowercased.
+    pub original_name: String,
     pub primary_key_columns: Vec<(String, SortOrder)>,
     pub primary_key_is_inline: bool,
     columns: Vec<Column>,
@@ -3857,6 +3861,7 @@ impl BTreeTable {
             );
         Self {
             root_page,
+            original_name: name.clone(),
             name,
             primary_key_columns,
             primary_key_is_inline,
@@ -4051,7 +4056,7 @@ impl BTreeTable {
     /// For example, if a user creates a table like: `CREATE TABLE t              (x)`, we store it as
     /// `CREATE TABLE t (x)`, whereas sqlite stores it with the original extra whitespace.
     pub fn to_sql(&self) -> String {
-        let mut sql = format!("CREATE TABLE {} (", quote_ident(&self.name));
+        let mut sql = format!("CREATE TABLE {} (", quote_ident(&self.original_name));
         let needs_pk_inline = self.primary_key_is_inline
             && self.primary_key_columns.len() == 1
             && self
@@ -5660,6 +5665,7 @@ pub fn create_table(tbl_name: &str, body: &CreateTableBody, root_page: i64) -> R
     let mut table = BTreeTable {
         root_page,
         name: table_name,
+        original_name: tbl_name.to_string(),
         has_rowid,
         primary_key_columns,
         primary_key_is_inline,
@@ -6414,6 +6420,7 @@ pub fn sqlite_schema_table() -> Result<BTreeTable> {
     Ok(BTreeTable {
         root_page: 1,
         name: "sqlite_schema".to_string(),
+        original_name: "sqlite_schema".to_string(),
         has_rowid: true,
         is_strict: false,
         has_autoincrement: false,
@@ -7670,6 +7677,7 @@ mod tests {
         let table = BTreeTable {
             root_page: 0,
             name: "t1".to_string(),
+            original_name: "t1".to_string(),
             has_rowid: true,
             is_strict: false,
             has_autoincrement: false,
