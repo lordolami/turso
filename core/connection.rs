@@ -2890,6 +2890,7 @@ impl Connection {
 
             match schema.populate_materialized_views_then_indices(
                 &syms,
+                self.db.dialect().as_ref(),
                 materialized_view_info,
                 dbsp_state_roots,
                 dbsp_state_index_roots,

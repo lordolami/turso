@@ -1971,6 +1971,7 @@ impl Schema {
                             .expect("accumulators must be initialized in Init phase");
                         self.populate_materialized_views_then_indices(
                             syms,
+                            dialect,
                             acc.materialized_view_info,
                             acc.dbsp_state_roots,
                             acc.dbsp_state_index_roots,
@@ -2050,6 +2051,7 @@ impl Schema {
     pub fn populate_indices(
         &mut self,
         syms: &SymbolTable,
+        dialect: &dyn crate::dialect::Dialect,
         from_sql_indexes: Vec<UnparsedFromSqlIndex>,
         automatic_indices: HashMap<String, Vec<(String, i64)>>,
         mvcc_enabled: bool,
@@ -2067,6 +2069,7 @@ impl Schema {
                 })?;
             let index = Index::from_sql(
                 syms,
+                dialect,
                 &unparsed_sql_from_index.sql,
                 unparsed_sql_from_index.root_page,
                 table.as_ref(),
@@ -2456,6 +2459,7 @@ impl Schema {
     pub fn populate_materialized_views_then_indices(
         &mut self,
         syms: &SymbolTable,
+        dialect: &dyn crate::dialect::Dialect,
         materialized_view_info: HashMap<String, (String, i64)>,
         dbsp_state_roots: HashMap<String, i64>,
         dbsp_state_index_roots: HashMap<String, i64>,
@@ -2468,7 +2472,13 @@ impl Schema {
             dbsp_state_roots,
             dbsp_state_index_roots,
         )?;
-        self.populate_indices(syms, from_sql_indexes, automatic_indices, mvcc_enabled)
+        self.populate_indices(
+            syms,
+            dialect,
+            from_sql_indexes,
+            automatic_indices,
+            mvcc_enabled,
+        )
     }
 
     /// Yield (backing_table_name, sequence_name) for every backing table
@@ -6573,6 +6583,7 @@ impl IndexColumn {
 impl Index {
     pub fn from_sql(
         syms: &SymbolTable,
+        dialect: &dyn crate::dialect::Dialect,
         sql: &str,
         root_page: i64,
         table: &BTreeTable,
@@ -6591,7 +6602,7 @@ impl Index {
                 ..
             })) => {
                 let index_name = normalize_ident(idx_name.name.as_str());
-                let index_columns = resolve_sorted_columns(table, &columns)?;
+                let index_columns = resolve_sorted_columns(table, &columns, dialect)?;
                 if let Some(using) = using {
                     if where_clause.is_some() {
                         bail_parse_error!("custom index module do not support partial indices");
@@ -6794,7 +6805,7 @@ impl Index {
 
     /// Walk the where_clause Expr of a partial index and validate that it doesn't reference any other
     /// tables or use any disallowed constructs.
-    pub fn validate_where_expr(&self, table: &Table, _resolver: &Resolver) -> bool {
+    pub fn validate_where_expr(&self, table: &Table, resolver: &Resolver) -> bool {
         let Some(where_clause) = &self.where_clause else {
             return true;
         };
@@ -6811,6 +6822,7 @@ impl Index {
         let is_deterministic_fn = |name: &str, argc: usize| {
             let n = normalize_ident(name);
             Func::resolve_function(&n, argc).is_ok_and(|f| f.is_some_and(|f| f.is_deterministic()))
+                || resolver.dialect.allows_frontend_function_in_index(&n)
         };
 
         let mut ok = true;
@@ -8642,7 +8654,13 @@ mod tests {
         );
 
         schema
-            .populate_indices(&SymbolTable::default(), vec![], automatic_indices, false)
+            .populate_indices(
+                &SymbolTable::default(),
+                &crate::dialect::SqliteDialect,
+                vec![],
+                automatic_indices,
+                false,
+            )
             .unwrap();
 
         let indexes: std::vec::Vec<_> = schema.get_indices("t_u").collect();
