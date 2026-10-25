@@ -212,6 +212,10 @@ impl Dialect for PostgresDialect {
             _ => None,
         }
     }
+
+    fn mod_of_integers_is_integer(&self) -> bool {
+        true
+    }
 }
 
 pub fn encode_pg_schema_sql(sql: &str) -> String {
@@ -2216,6 +2220,17 @@ pub(crate) fn register_catalog_modules(mut options: OpenOptions) -> OpenOptions 
         EmptyPgCatalogTable { create_sql: "CREATE TABLE pg_description (objoid INTEGER, classoid INTEGER, objsubid INTEGER, description TEXT)".to_string() },
     );
     options = options.native_module(
+        "pg_seclabels",
+        VTabKind::TableValuedFunction,
+        EmptyPgCatalogTable {
+            create_sql: "CREATE TABLE pg_seclabels (
+                objoid INTEGER, classoid INTEGER, objsubid INTEGER, objtype TEXT,
+                objnamespace INTEGER, objname TEXT, provider TEXT, label TEXT
+            )"
+            .to_string(),
+        },
+    );
+    options = options.native_module(
         "pg_publication",
         VTabKind::TableValuedFunction,
         EmptyPgCatalogTable { create_sql: "CREATE TABLE pg_publication (oid INTEGER, pubname TEXT, pubowner INTEGER, puballtables INTEGER, pubinsert INTEGER, pubupdate INTEGER, pubdelete INTEGER, pubtruncate INTEGER, pubviaroot INTEGER, tableoid INTEGER HIDDEN)".to_string() },
@@ -2223,7 +2238,7 @@ pub(crate) fn register_catalog_modules(mut options: OpenOptions) -> OpenOptions 
     options = options.native_module(
         "pg_publication_namespace",
         VTabKind::TableValuedFunction,
-        EmptyPgCatalogTable { create_sql: "CREATE TABLE pg_publication_namespace (oid INTEGER, pnpubid INTEGER, pnnspid INTEGER)".to_string() },
+        EmptyPgCatalogTable { create_sql: "CREATE TABLE pg_publication_namespace (oid INTEGER, pnpubid INTEGER, pnnspid INTEGER, tableoid INTEGER HIDDEN)".to_string() },
     );
     options = options.native_module(
         "pg_publication_rel",

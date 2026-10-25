@@ -398,7 +398,7 @@ pub enum SubqueryOrigin {
     DmlWhere,
     DmlSet,
     DmlReturning,
-    TriggerWhen,
+    ExprWithoutFromClause,
 }
 
 impl SubqueryOrigin {
@@ -410,7 +410,7 @@ impl SubqueryOrigin {
             | SubqueryOrigin::SelectHaving
             | SubqueryOrigin::SelectOrderBy
             | SubqueryOrigin::SelectLimitOffset
-            | SubqueryOrigin::TriggerWhen => SubqueryEvalPhase::BeforeLoop,
+            | SubqueryOrigin::ExprWithoutFromClause => SubqueryEvalPhase::BeforeLoop,
             SubqueryOrigin::DmlWhere => SubqueryEvalPhase::BeforeLoop,
             SubqueryOrigin::DmlSet => SubqueryEvalPhase::PreWrite,
             SubqueryOrigin::DmlReturning => SubqueryEvalPhase::PostWriteReturning,
@@ -1810,6 +1810,8 @@ pub struct OuterQueryReference {
     pub internal_id: TableInternalId,
     /// Table object, which contains metadata about the table, e.g. columns.
     pub table: Table,
+    /// The database the table belongs to, used to match schema-qualified names.
+    pub database_id: usize,
     /// The join that added this table in the outer scope's FROM list, so an
     /// unqualified name follows the same USING rules there as it does in the
     /// outer query itself (see [unqualified_column_sources]). None for the
@@ -4306,7 +4308,8 @@ pub struct NonFromClauseSubquery {
     pub correlated: bool,
     pub origin: SubqueryOrigin,
     pub eval_phase: SubqueryEvalPhase,
-    /// Run after this table when a later loop needs fewer calls.
+    /// Run after this table, either because a later loop needs fewer calls or
+    /// because this table's hash join loads columns the subquery reads.
     pub preferred_eval_after_table: Option<TableInternalId>,
 }
 

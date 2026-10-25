@@ -105,6 +105,10 @@ pub fn translate(
         ProgramBuilderOpts::new(1, 32, 2),
     ));
     program.set_mvcc_enabled(connection.mvcc_enabled());
+    program.flags.set_keep_array_results_as_blobs(matches!(
+        origin,
+        crate::statement::StatementOrigin::InternalHelper
+    ));
 
     program.prologue();
     // Engine-generated helper statements are always SQLite text and
@@ -463,9 +467,13 @@ pub fn translate_inner(
             }
             translate_update(update, resolver, program, connection)?
         }
-        ast::Stmt::Vacuum { name, into } => {
-            vacuum::translate_vacuum(program, name.as_ref(), into.as_deref(), connection.clone())?
-        }
+        ast::Stmt::Vacuum { name, into } => vacuum::translate_vacuum(
+            program,
+            resolver,
+            name.as_ref(),
+            into.as_deref(),
+            connection.clone(),
+        )?,
         ast::Stmt::Insert {
             with,
             or_conflict,

@@ -259,6 +259,13 @@ pub trait Dialect: Send + Sync + 'static {
     fn comparison_type(&self, _lhs_type: &str, _rhs_type: &str) -> Option<&'static str> {
         None
     }
+
+    /// Whether `mod` of two integers returns an integer.
+    ///
+    /// PostgreSQL returns an integer. SQLite always returns a REAL.
+    fn mod_of_integers_is_integer(&self) -> bool {
+        false
+    }
 }
 
 #[cfg(test)]
