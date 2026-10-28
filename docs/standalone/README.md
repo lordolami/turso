@@ -10,6 +10,8 @@ No NoSQL/document frontend, managed cloud service, distributed cluster, sharding
 
 The upstream audit is fixed to [017ea183c2a323a66d515448e4df464b6181bb36](https://github.com/tursodatabase/turso/commit/017ea183c2a323a66d515448e4df464b6181bb36), committed on 2026-10-28. Source references and evidence records are in [the audit](upstream-audit.md) and [source evidence](source-evidence.md).
 
+Mira's project folder contains this documentation and its maintenance tools. Turso's source is kept in a separate checkout, locally at ../turso-engine. Upstream references use pinned web links. The checker works without engine source and explicitly reports source verification skipped when that checkout is unavailable; set MIRA_TURSO_SOURCE to verify against another location. Source-derived regeneration requires the audited checkout.
+
 ## Read this specification
 
 | Document | What it settles |

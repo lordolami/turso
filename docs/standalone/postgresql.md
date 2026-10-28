@@ -46,7 +46,7 @@ Implementing a Go wire decoder is not implementing PostgreSQL semantics. Every s
 
 ## Observed compatibility areas
 
-At the audited revision, the reference covers substantial SELECT/JOIN/DML, constraints, indexes, schemas, sequences, domains/enums, arrays, UUID/network/custom types, casts, expressions, materialized views, savepoints, and portions of simple/extended wire querying. It also documents partial behavior and rejected features. This table highlights boundaries; [postgres/COMPAT.md](../../postgres/COMPAT.md) remains authoritative for individual entries.
+At the audited revision, the reference covers substantial SELECT/JOIN/DML, constraints, indexes, schemas, sequences, domains/enums, arrays, UUID/network/custom types, casts, expressions, materialized views, savepoints, and portions of simple/extended wire querying. It also documents partial behavior and rejected features. This table highlights boundaries; [postgres/COMPAT.md](https://github.com/tursodatabase/turso/blob/017ea183c2a323a66d515448e4df464b6181bb36/postgres/COMPAT.md) remains authoritative for individual entries.
 
 | Area | Boundary to preserve |
 |---|---|

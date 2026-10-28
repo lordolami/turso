@@ -2,7 +2,7 @@
   "revision": "017ea183c2a323a66d515448e4df464b6181bb36",
   "status": "upstream authors' compatibility table assertions, not verified product support",
   "extraction": "All data rows in tables with a Status header in the two compatibility documents, including Not Needed and the status legend. Prose-only qualifications remain authoritative in the originals.",
-  "attribution": "Turso contributors, upstream MIT license; see repository LICENSE.md",
+  "attribution": "Turso contributors, upstream MIT license; see THIRD_PARTY_NOTICES.md and the pinned upstream LICENSE.md",
   "rows": [
     {
       "dialect": "sqlite",

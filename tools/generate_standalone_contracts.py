@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -15,6 +16,25 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs" / "standalone"
 OUT = DOCS / "contracts"
 REVISION = "017ea183c2a323a66d515448e4df464b6181bb36"
+
+
+def find_source_root() -> Path | None:
+    configured = os.environ.get("MIRA_TURSO_SOURCE")
+    if configured:
+        return Path(configured).expanduser().resolve()
+    for candidate in (ROOT, ROOT.parent / "turso-engine"):
+        if (candidate / "core" / "database.rs").is_file():
+            return candidate
+    return None
+
+
+SOURCE_ROOT = find_source_root()
+
+
+def require_source_root() -> Path:
+    if SOURCE_ROOT is None:
+        raise ValueError("Source regeneration requires ../turso-engine or MIRA_TURSO_SOURCE pointing to the audited checkout")
+    return SOURCE_ROOT
 
 # id | method | path | permission | execution | input fields | result | purpose
 # R=read, M=synchronous mutation, J=durable job. ! marks required input.
@@ -539,7 +559,7 @@ def extract_capabilities() -> list[dict]:
     rows = []
     for path, dialect in [("COMPAT.md", "sqlite"), ("postgres/COMPAT.md", "postgres")]:
         section, headers = [], []
-        for number, raw in enumerate((ROOT / path).read_text(encoding="utf-8").splitlines(), 1):
+        for number, raw in enumerate((require_source_root() / path).read_text(encoding="utf-8").splitlines(), 1):
             heading = re.match(r"^(#{1,6}) (.+)", raw)
             if heading:
                 level = len(heading[1])
@@ -566,7 +586,7 @@ def extract_capabilities() -> list[dict]:
 def make_evidence() -> None:
     records = []
     for n, (path, pattern, observation) in enumerate(EVIDENCE, 1):
-        data = (ROOT / path).read_text(encoding="utf-8").encode("utf-8")
+        data = (require_source_root() / path).read_text(encoding="utf-8").encode("utf-8")
         lines = data.decode("utf-8").splitlines()
         matches = [i for i, line in enumerate(lines, 1) if re.search(pattern, line)]
         if not matches:
@@ -587,7 +607,7 @@ def make_evidence() -> None:
     rows = extract_capabilities()
     dump("upstream-capabilities.json", {"revision": REVISION, "status": "upstream authors' compatibility table assertions, not verified product support",
         "extraction": "All data rows in tables with a Status header in the two compatibility documents, including Not Needed and the status legend. Prose-only qualifications remain authoritative in the originals.",
-        "attribution": "Turso contributors, upstream MIT license; see repository LICENSE.md", "rows": rows})
+        "attribution": "Turso contributors, upstream MIT license; see THIRD_PARTY_NOTICES.md and the pinned upstream LICENSE.md", "rows": rows})
     intro = """# Source evidence and complete upstream table inventory
 
 This audit is fixed to upstream commit `""" + REVISION + """`. Each record below links to an immutable source location. The machine-readable records include SHA-256 hashes of the local audited files. Source inspection establishes implementation facts and gaps; it does not establish a passed runtime test.
@@ -608,6 +628,7 @@ The [product capability matrix](capability-matrix.md) maps these engine faciliti
 
 
 def main() -> None:
+    require_source_root()
     make_operations()
     make_requirements()
     make_evidence()

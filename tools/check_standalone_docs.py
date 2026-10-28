@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote
 
-from generate_standalone_contracts import REQUIREMENTS, REVISION, extract_capabilities
+from generate_standalone_contracts import REQUIREMENTS, REVISION, SOURCE_ROOT, extract_capabilities
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs" / "standalone"
@@ -252,22 +252,26 @@ def check_sql() -> int:
         return len(tables)
 
 
-def check_evidence() -> tuple[int, int]:
+def check_evidence() -> tuple[int, int, str]:
     data = read_json(CONTRACTS / "source-evidence.json")
     require(data["revision"] == REVISION, "Evidence revision mismatch")
     for record in data["records"]:
-        path = ROOT / record["path"]
-        require(hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest() == record["sha256"], f"Changed audited source: {path}")
-        lines = path.read_text(encoding="utf-8").splitlines()
-        require(re.search(record["pattern"], lines[record["line"] - 1]) is not None, f"Wrong evidence anchor: {path}")
         require(REVISION in record["url"], "Unpinned local evidence URL")
+        if SOURCE_ROOT is not None:
+            path = SOURCE_ROOT / record["path"]
+            require(hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest() == record["sha256"], f"Changed audited source: {path}")
+            lines = path.read_text(encoding="utf-8").splitlines()
+            require(re.search(record["pattern"], lines[record["line"] - 1]) is not None, f"Wrong evidence anchor: {path}")
     inventory = read_json(CONTRACTS / "upstream-capabilities.json")
     require(inventory["revision"] == REVISION, "Capability revision mismatch")
-    require(inventory["rows"] == extract_capabilities(), "Upstream inventory differs from source tables")
+    if SOURCE_ROOT is not None:
+        require(inventory["rows"] == extract_capabilities(), "Upstream inventory differs from source tables")
     require({r["dialect"] for r in inventory["rows"]} == {"sqlite", "postgres"}, "Missing dialect inventory")
-    git = subprocess.run(["git", "rev-parse", f"{REVISION}^{{commit}}"], cwd=ROOT, text=True, capture_output=True, check=True)
-    require(git.stdout.strip() == REVISION, "Audited commit not available locally")
-    return len(data["records"]), len(inventory["rows"])
+    if SOURCE_ROOT is not None:
+        git = subprocess.run(["git", "rev-parse", f"{REVISION}^{{commit}}"], cwd=SOURCE_ROOT, text=True, capture_output=True, check=True)
+        require(git.stdout.strip() == REVISION, "Audited commit not available in source checkout")
+    source_status = "passed against separate source checkout" if SOURCE_ROOT is not None else "skipped: source checkout unavailable; document structure checked only"
+    return len(data["records"]), len(inventory["rows"]), source_status
 
 
 def main() -> None:
@@ -280,13 +284,13 @@ def main() -> None:
     requirements = check_requirements()
     negatives = check_config()
     tables = check_sql()
-    evidence, capabilities = check_evidence()
+    evidence, capabilities, source_status = check_evidence()
     words = sum(len(re.findall(r"\S+", p.read_text(encoding="utf-8"))) for p in DOCS.rglob("*.md") if p.name != "validation-report.md")
     print(json.dumps({"result": "passed", "markdown_documents": documents, "markdown_words_excluding_validation_report": words,
         "local_links": links, "json_files": len(json_files), "operations": operations,
         "requirements": requirements, "catalog_tables": tables,
         "configuration_rejection_cases": negatives, "source_evidence_records": evidence,
-        "upstream_status_rows": capabilities, "sqlite_parser_version": sqlite3.sqlite_version,
+        "upstream_status_rows": capabilities, "source_verification": source_status, "sqlite_parser_version": sqlite3.sqlite_version,
         "limits": "Documentation checks only; schema keyword subset, independent SQLite syntax, no native/Go application tests"}, indent=2))
 
 

@@ -47,7 +47,7 @@ The current native C header includes status values such as BUSY_SNAPSHOT and IOE
 
 ## PostgreSQL audit
 
-The compatibility reference is [postgres/COMPAT.md](../../postgres/COMPAT.md), not the marketing phrase PostgreSQL-compatible by itself. Supported syntax and protocol coverage are incomplete. Authentication, GRANT/REVOKE, PostgreSQL role enforcement, native RLS, logical replication, and many extension/server features are absent at this revision. Native catalog entries with hardcoded roles are not an authorization system.
+The compatibility reference is [postgres/COMPAT.md](https://github.com/tursodatabase/turso/blob/017ea183c2a323a66d515448e4df464b6181bb36/postgres/COMPAT.md), not the marketing phrase PostgreSQL-compatible by itself. Supported syntax and protocol coverage are incomplete. Authentication, GRANT/REVOKE, PostgreSQL role enforcement, native RLS, logical replication, and many extension/server features are absent at this revision. Native catalog entries with hardcoded roles are not an authorization system.
 
 Shared-session behavior in the reference wire server can leak parameters and transaction state between network clients. The product uses an independent native PgConnection for each logical client session. Platform identity is trusted out-of-band state; SQL-modifiable settings such as request.jwt.claims cannot establish identity or grant access.
 

@@ -61,7 +61,7 @@ product/
   web/                       dashboard source and locked build dependencies
 ~~~
 
-Keep upstream engine files in their existing locations. Generic authorization/history hooks belong in core; dialect semantics stay in the Dialect boundary and postgres/frontend. Do not place user, organization, HTTP, MCP, or platform billing concepts in engine storage code. This follows the upstream [agent guidelines](../../AGENTS.md).
+Keep the upstream engine in a separate checkout, preserving its internal source layout. Generic authorization/history hooks belong in core; dialect semantics stay in the Dialect boundary and postgres/frontend. Do not place user, organization, HTTP, MCP, or platform billing concepts in engine storage code. This follows the upstream [agent guidelines](https://github.com/tursodatabase/turso/blob/017ea183c2a323a66d515448e4df464b6181bb36/AGENTS.md).
 
 ## Single operation path
 
