@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mira:proposed:config:1",
+  "title": "Proposed standalone Mira configuration, version 1",
+  "description": "Design contract only. No cloud or distributed deployment configuration. Secret references identify protected operator-provided material.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "instance", "http", "postgres", "security", "resources", "history", "backups", "sync", "changes", "mcp", "observability"],
+  "$defs": {
+    "positive": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "nonnegative": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "text": {"type": "string", "minLength": 1, "maxLength": 4096},
+    "texts": {"type": "array", "items": {"$ref": "#/$defs/text"}, "maxItems": 1000},
+    "optional_ref": {"type": ["string", "null"], "maxLength": 4096},
+    "tls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "certificate_ref", "private_key_ref"],
+      "properties": {
+        "mode": {"enum": ["disabled_loopback", "required", "trusted_local_proxy"]},
+        "certificate_ref": {"$ref": "#/$defs/optional_ref"},
+        "private_key_ref": {"$ref": "#/$defs/optional_ref"}
+      }
+    },
+    "retention": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_age_seconds", "max_bytes"],
+      "properties": {
+        "max_age_seconds": {"$ref": "#/$defs/positive"},
+        "max_bytes": {"$ref": "#/$defs/positive"},
+        "max_artifacts": {"$ref": "#/$defs/positive"}
+      }
+    }
+  },
+  "properties": {
+    "version": {"const": 1},
+    "instance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["data_dir", "environment", "control_transport"],
+      "properties": {
+        "data_dir": {"$ref": "#/$defs/text"},
+        "environment": {"$ref": "#/$defs/text"},
+        "control_transport": {"enum": ["os_local"]}
+      }
+    },
+    "http": {
+      "type": "object", "additionalProperties": false,
+      "required": ["listen", "tls", "allowed_origins", "allowed_hosts", "trusted_proxy_cidrs", "request_body_bytes", "request_timeout_ms", "stream_idle_ms"],
+      "properties": {
+        "listen": {"$ref": "#/$defs/text"}, "tls": {"$ref": "#/$defs/tls"},
+        "allowed_origins": {"$ref": "#/$defs/texts"}, "allowed_hosts": {"$ref": "#/$defs/texts"},
+        "trusted_proxy_cidrs": {"$ref": "#/$defs/texts"},
+        "request_body_bytes": {"$ref": "#/$defs/positive"},
+        "request_timeout_ms": {"$ref": "#/$defs/positive"},
+        "stream_idle_ms": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "postgres": {
+      "type": "object", "additionalProperties": false,
+      "required": ["enabled", "listen", "tls", "authentication", "message_bytes", "max_connections", "transaction_idle_ms", "portal_idle_ms"],
+      "properties": {
+        "enabled": {"type": "boolean"}, "listen": {"$ref": "#/$defs/text"}, "tls": {"$ref": "#/$defs/tls"},
+        "authentication": {"enum": ["scram_sha_256", "password_over_tls"]},
+        "message_bytes": {"$ref": "#/$defs/positive"}, "max_connections": {"$ref": "#/$defs/positive"},
+        "transaction_idle_ms": {"$ref": "#/$defs/positive"}, "portal_idle_ms": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "security": {
+      "type": "object", "additionalProperties": false,
+      "required": ["signing_key_ref", "password_hash", "login_session_seconds", "credential_max_seconds", "login_attempts_per_minute", "network_allow_cidrs", "extension_roots", "jwks_cache_seconds", "jwks_stale_grace_seconds"],
+      "properties": {
+        "signing_key_ref": {"$ref": "#/$defs/text"},
+        "password_hash": {
+          "type": "object", "additionalProperties": false,
+          "required": ["algorithm", "memory_kib", "iterations", "parallelism"],
+          "properties": {"algorithm": {"const": "argon2id"}, "memory_kib": {"$ref": "#/$defs/positive"}, "iterations": {"$ref": "#/$defs/positive"}, "parallelism": {"$ref": "#/$defs/positive"}}
+        },
+        "login_session_seconds": {"$ref": "#/$defs/positive"}, "credential_max_seconds": {"$ref": "#/$defs/positive"},
+        "login_attempts_per_minute": {"$ref": "#/$defs/positive"},
+        "network_allow_cidrs": {"$ref": "#/$defs/texts"}, "extension_roots": {"$ref": "#/$defs/texts"},
+        "jwks_cache_seconds": {"$ref": "#/$defs/positive"}, "jwks_stale_grace_seconds": {"$ref": "#/$defs/nonnegative"}
+      }
+    },
+    "resources": {
+      "type": "object", "additionalProperties": false,
+      "required": ["go_memory_soft_bytes", "native_memory_budget_bytes", "max_active_databases", "max_connections", "max_active_queries", "max_queued_queries", "per_database_cache_bytes", "file_descriptor_reserve", "background_workers", "statement_timeout_ms", "result_max_rows", "result_max_bytes", "cursor_idle_ms", "operator_database_count_limit"],
+      "properties": {
+        "go_memory_soft_bytes": {"$ref": "#/$defs/positive"}, "native_memory_budget_bytes": {"$ref": "#/$defs/positive"},
+        "max_active_databases": {"$ref": "#/$defs/positive"}, "max_connections": {"$ref": "#/$defs/positive"},
+        "max_active_queries": {"$ref": "#/$defs/positive"}, "max_queued_queries": {"$ref": "#/$defs/positive"},
+        "per_database_cache_bytes": {"$ref": "#/$defs/positive"}, "file_descriptor_reserve": {"$ref": "#/$defs/positive"},
+        "background_workers": {"$ref": "#/$defs/positive"}, "statement_timeout_ms": {"$ref": "#/$defs/positive"},
+        "result_max_rows": {"$ref": "#/$defs/positive"}, "result_max_bytes": {"$ref": "#/$defs/positive"},
+        "cursor_idle_ms": {"$ref": "#/$defs/positive"},
+        "operator_database_count_limit": {"type": ["integer", "null"], "minimum": 1, "description": "Optional operator policy only. Null is unset; product imposes no vendor count cap."}
+      }
+    },
+    "history": {
+      "type": "object", "additionalProperties": false,
+      "required": ["enabled_by_default", "archive_root", "retention", "disk_reserve_bytes", "archive_segment_bytes"],
+      "properties": {
+        "enabled_by_default": {"type": "boolean"}, "archive_root": {"$ref": "#/$defs/text"},
+        "retention": {"$ref": "#/$defs/retention"}, "disk_reserve_bytes": {"$ref": "#/$defs/positive"},
+        "archive_segment_bytes": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "backups": {
+      "type": "object", "additionalProperties": false,
+      "required": ["authorized_local_roots", "verify_by_default", "workers"],
+      "properties": {"authorized_local_roots": {"$ref": "#/$defs/texts"}, "verify_by_default": {"type": "boolean"}, "workers": {"$ref": "#/$defs/positive"}}
+    },
+    "sync": {
+      "type": "object", "additionalProperties": false,
+      "required": ["enabled", "max_bootstrap_bytes", "bootstrap_concurrency", "client_retention_seconds", "max_pull_bytes", "long_poll_ms"],
+      "properties": {
+        "enabled": {"type": "boolean"}, "max_bootstrap_bytes": {"$ref": "#/$defs/positive"},
+        "bootstrap_concurrency": {"$ref": "#/$defs/positive"}, "client_retention_seconds": {"$ref": "#/$defs/positive"},
+        "max_pull_bytes": {"$ref": "#/$defs/positive"}, "long_poll_ms": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "changes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_subscriptions", "queue_bytes_per_subscription", "cursor_retention_seconds", "cdc_retention"],
+      "properties": {
+        "max_subscriptions": {"$ref": "#/$defs/positive"}, "queue_bytes_per_subscription": {"$ref": "#/$defs/positive"},
+        "cursor_retention_seconds": {"$ref": "#/$defs/positive"}, "cdc_retention": {"$ref": "#/$defs/retention"}
+      }
+    },
+    "mcp": {
+      "type": "object", "additionalProperties": false,
+      "required": ["http_enabled", "http_path", "stdio_proxy_enabled", "protocol_versions", "discovery_page_size", "result_bytes"],
+      "properties": {
+        "http_enabled": {"type": "boolean"}, "http_path": {"const": "/mcp"}, "stdio_proxy_enabled": {"type": "boolean"},
+        "protocol_versions": {"type": "array", "minItems": 1, "items": {"enum": ["2026-07-28", "2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"]}},
+        "discovery_page_size": {"type": "integer", "minimum": 1, "maximum": 1000}, "result_bytes": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "observability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metrics_enabled", "log_level", "log_retention", "audit_retention", "sql_capture", "diagnostic_max_bytes"],
+      "properties": {
+        "metrics_enabled": {"type": "boolean"}, "log_level": {"enum": ["debug", "info", "warn", "error"]},
+        "log_retention": {"$ref": "#/$defs/retention"}, "audit_retention": {"$ref": "#/$defs/retention"},
+        "sql_capture": {"enum": ["disabled", "normalized", "explicit_sensitive_opt_in"]}, "diagnostic_max_bytes": {"$ref": "#/$defs/positive"}
+      }
+    }
+  }
+}

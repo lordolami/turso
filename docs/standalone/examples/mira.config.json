@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "instance": {"data_dir": "./mira_data", "environment": "local", "control_transport": "os_local"},
+  "http": {
+    "listen": "127.0.0.1:8090",
+    "tls": {"mode": "disabled_loopback", "certificate_ref": null, "private_key_ref": null},
+    "allowed_origins": ["http://127.0.0.1:8090"], "allowed_hosts": ["127.0.0.1:8090", "localhost:8090"],
+    "trusted_proxy_cidrs": [], "request_body_bytes": 2097152, "request_timeout_ms": 30000, "stream_idle_ms": 60000
+  },
+  "postgres": {
+    "enabled": false, "listen": "127.0.0.1:5433",
+    "tls": {"mode": "disabled_loopback", "certificate_ref": null, "private_key_ref": null},
+    "authentication": "scram_sha_256", "message_bytes": 16777216, "max_connections": 64,
+    "transaction_idle_ms": 60000, "portal_idle_ms": 30000
+  },
+  "security": {
+    "signing_key_ref": "local-secret:instance-signing-key",
+    "password_hash": {"algorithm": "argon2id", "memory_kib": 65536, "iterations": 3, "parallelism": 1},
+    "login_session_seconds": 43200, "credential_max_seconds": 31536000, "login_attempts_per_minute": 10,
+    "network_allow_cidrs": ["127.0.0.0/8", "::1/128"], "extension_roots": [],
+    "jwks_cache_seconds": 300, "jwks_stale_grace_seconds": 0
+  },
+  "resources": {
+    "go_memory_soft_bytes": 134217728, "native_memory_budget_bytes": 268435456,
+    "max_active_databases": 32, "max_connections": 128, "max_active_queries": 16, "max_queued_queries": 128,
+    "per_database_cache_bytes": 4194304, "file_descriptor_reserve": 64, "background_workers": 2,
+    "statement_timeout_ms": 30000, "result_max_rows": 1000, "result_max_bytes": 4194304,
+    "cursor_idle_ms": 30000, "operator_database_count_limit": null
+  },
+  "history": {
+    "enabled_by_default": true, "archive_root": "./mira_data/history",
+    "retention": {"max_age_seconds": 604800, "max_bytes": 10737418240},
+    "disk_reserve_bytes": 1073741824, "archive_segment_bytes": 67108864
+  },
+  "backups": {"authorized_local_roots": ["./mira_backups"], "verify_by_default": true, "workers": 1},
+  "sync": {
+    "enabled": true, "max_bootstrap_bytes": 1073741824, "bootstrap_concurrency": 1,
+    "client_retention_seconds": 604800, "max_pull_bytes": 4194304, "long_poll_ms": 25000
+  },
+  "changes": {
+    "max_subscriptions": 128, "queue_bytes_per_subscription": 1048576, "cursor_retention_seconds": 3600,
+    "cdc_retention": {"max_age_seconds": 86400, "max_bytes": 1073741824}
+  },
+  "mcp": {
+    "http_enabled": true, "http_path": "/mcp", "stdio_proxy_enabled": true,
+    "protocol_versions": ["2026-07-28", "2025-11-25"], "discovery_page_size": 50, "result_bytes": 1048576
+  },
+  "observability": {
+    "metrics_enabled": true, "log_level": "info", "sql_capture": "normalized", "diagnostic_max_bytes": 67108864,
+    "log_retention": {"max_age_seconds": 604800, "max_bytes": 268435456},
+    "audit_retention": {"max_age_seconds": 7776000, "max_bytes": 1073741824}
+  }
+}

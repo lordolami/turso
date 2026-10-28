@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mira-local": {
+      "command": "mira",
+      "args": ["mcp", "--instance", "local", "--credential", "agent"],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,1121 @@
+{
+  "version": 1,
+  "requirements": [
+    {
+      "id": "SCOPE-001",
+      "area": "SCOPE",
+      "requirement": "Write product services in Go with compiled engine dependencies",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: write product services in go with compiled engine dependencies. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-002",
+      "area": "SCOPE",
+      "requirement": "Deliver one executable per qualified platform",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: deliver one executable per qualified platform. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-003",
+      "area": "SCOPE",
+      "requirement": "Expose SQLite and PostgreSQL as explicit dialects",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose sqlite and postgresql as explicit dialects. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-004",
+      "area": "SCOPE",
+      "requirement": "Implement the full standalone scope without substituting an MVP",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: implement the full standalone scope without substituting an mvp. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-005",
+      "area": "SCOPE",
+      "requirement": "Operate locally without vendor account or quota service",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: operate locally without vendor account or quota service. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-006",
+      "area": "SCOPE",
+      "requirement": "Allow catalog count to grow without a vendor database-count cap",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: allow catalog count to grow without a vendor database-count cap. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-007",
+      "area": "SCOPE",
+      "requirement": "Give authorized MCP agents complete operation parity",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: give authorized mcp agents complete operation parity. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-008",
+      "area": "SCOPE",
+      "requirement": "Keep NoSQL and cloud/distributed operations outside this scope",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: keep nosql and cloud/distributed operations outside this scope. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-009",
+      "area": "SCOPE",
+      "requirement": "Retain JSON, arrays, vectors, and text search in SQL",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: retain json, arrays, vectors, and text search in sql. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCOPE-010",
+      "area": "SCOPE",
+      "requirement": "Support synchronization to the self-hosted installation",
+      "owner_document": "product-scope.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: support synchronization to the self-hosted installation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "INST-001",
+      "area": "INST",
+      "requirement": "Establish exactly one initial owner through protected bootstrap",
+      "owner_document": "configuration-and-deployment.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: establish exactly one initial owner through protected bootstrap. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "INST-002",
+      "area": "INST",
+      "requirement": "Validate versioned configuration and listener exposure",
+      "owner_document": "configuration-and-deployment.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: validate versioned configuration and listener exposure. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "INST-003",
+      "area": "INST",
+      "requirement": "Enforce one process owner per installation and reconcile startup state",
+      "owner_document": "configuration-and-deployment.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce one process owner per installation and reconcile startup state. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "INST-004",
+      "area": "INST",
+      "requirement": "Drain sessions and durable work safely during shutdown",
+      "owner_document": "configuration-and-deployment.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: drain sessions and durable work safely during shutdown. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-001",
+      "area": "DB",
+      "requirement": "Create independent persistent and in-memory databases",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: create independent persistent and in-memory databases. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-002",
+      "area": "DB",
+      "requirement": "List and inspect dormant databases without opening engine handles",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: list and inspect dormant databases without opening engine handles. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-003",
+      "area": "DB",
+      "requirement": "Persist immutable provider and dialect with stable database identity",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: persist immutable provider and dialect with stable database identity. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-004",
+      "area": "DB",
+      "requirement": "Rename and move catalog resources without unsafe file renames",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: rename and move catalog resources without unsafe file renames. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-005",
+      "area": "DB",
+      "requirement": "Apply resource policies and read/write blocking consistently",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: apply resource policies and read/write blocking consistently. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-006",
+      "area": "DB",
+      "requirement": "Enforce deletion protection and expected-generation checks",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce deletion protection and expected-generation checks. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-007",
+      "area": "DB",
+      "requirement": "Delete through draining and recoverable trash publication",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: delete through draining and recoverable trash publication. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DB-008",
+      "area": "DB",
+      "requirement": "Evict only unpinned active handles without limiting catalog count",
+      "owner_document": "database-lifecycle.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: evict only unpinned active handles without limiting catalog count. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "ORG-001",
+      "area": "ORG",
+      "requirement": "Create and manage organizations and database groups",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: create and manage organizations and database groups. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "ORG-002",
+      "area": "ORG",
+      "requirement": "Maintain memberships and final-owner invariants",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: maintain memberships and final-owner invariants. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "ORG-003",
+      "area": "ORG",
+      "requirement": "Redeem and revoke bounded local invitations",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: redeem and revoke bounded local invitations. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "ORG-004",
+      "area": "ORG",
+      "requirement": "Apply group defaults and custom roles with explicit inheritance",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: apply group defaults and custom roles with explicit inheritance. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CAT-001",
+      "area": "CAT",
+      "requirement": "Persist stable IDs, revisions, and paginated resource lookup",
+      "owner_document": "catalog-and-storage.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: persist stable ids, revisions, and paginated resource lookup. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CAT-002",
+      "area": "CAT",
+      "requirement": "Reconcile catalog and filesystem lifecycle intents after crashes",
+      "owner_document": "catalog-and-storage.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: reconcile catalog and filesystem lifecycle intents after crashes. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CAT-003",
+      "area": "CAT",
+      "requirement": "Bind active sessions and artifacts to explicit generations",
+      "owner_document": "catalog-and-storage.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: bind active sessions and artifacts to explicit generations. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CAT-004",
+      "area": "CAT",
+      "requirement": "Back up and recover private catalog metadata with key references",
+      "owner_document": "catalog-and-storage.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: back up and recover private catalog metadata with key references. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SQL-001",
+      "area": "SQL",
+      "requirement": "Advertise audited SQLite SQL and file compatibility precisely",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: advertise audited sqlite sql and file compatibility precisely. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SQL-002",
+      "area": "SQL",
+      "requirement": "Preserve supported constraints, indexes, views, and triggers",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: preserve supported constraints, indexes, views, and triggers. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SQL-003",
+      "area": "SQL",
+      "requirement": "Expose functions, PRAGMA controls, and introspection under policy",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose functions, pragma controls, and introspection under policy. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SQL-004",
+      "area": "SQL",
+      "requirement": "Gate experimental features without silently changing semantics",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: gate experimental features without silently changing semantics. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-001",
+      "area": "PG",
+      "requirement": "Parse and execute through the actual PostgreSQL frontend",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: parse and execute through the actual postgresql frontend. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-002",
+      "area": "PG",
+      "requirement": "Persist and reattach schema namespaces consistently across sessions",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: persist and reattach schema namespaces consistently across sessions. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-003",
+      "area": "PG",
+      "requirement": "Serve authenticated encrypted PostgreSQL wire connections",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: serve authenticated encrypted postgresql wire connections. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-004",
+      "area": "PG",
+      "requirement": "Isolate transaction, setting, prepared-statement, and portal state per client",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: isolate transaction, setting, prepared-statement, and portal state per client. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-005",
+      "area": "PG",
+      "requirement": "Preserve typed parameters, results, and native SQLSTATE where available",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: preserve typed parameters, results, and native sqlstate where available. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "PG-006",
+      "area": "PG",
+      "requirement": "Publish tested PostgreSQL compatibility and reject unsupported behavior",
+      "owner_document": "postgresql.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: publish tested postgresql compatibility and reject unsupported behavior. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-001",
+      "area": "QUERY",
+      "requirement": "Execute bound SQL with exact typed values and native action authorization",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: execute bound sql with exact typed values and native action authorization. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-002",
+      "area": "QUERY",
+      "requirement": "Maintain principal- and generation-bound explicit transactions",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: maintain principal- and generation-bound explicit transactions. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-003",
+      "area": "QUERY",
+      "requirement": "Bound result buffers, cursors, and session lifetimes",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: bound result buffers, cursors, and session lifetimes. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-004",
+      "area": "QUERY",
+      "requirement": "Cancel native work without freeing live state or inventing rollback",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: cancel native work without freeing live state or inventing rollback. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-005",
+      "area": "QUERY",
+      "requirement": "Return stable errors and explicit commit certainty",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: return stable errors and explicit commit certainty. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "QUERY-006",
+      "area": "QUERY",
+      "requirement": "Expose query plans and permitted connection diagnostics",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose query plans and permitted connection diagnostics. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCHEMA-001",
+      "area": "SCHEMA",
+      "requirement": "Inspect resolved objects, dependencies, and dialect-native DDL",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: inspect resolved objects, dependencies, and dialect-native ddl. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCHEMA-002",
+      "area": "SCHEMA",
+      "requirement": "Apply schema edits with native policy and schema revision checks",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: apply schema edits with native policy and schema revision checks. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCHEMA-003",
+      "area": "SCHEMA",
+      "requirement": "Store checksummed versioned templates and migrations",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: store checksummed versioned templates and migrations. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SCHEMA-004",
+      "area": "SCHEMA",
+      "requirement": "Run bounded group migrations with independent durable outcomes",
+      "owner_document": "query-protocols.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: run bounded group migrations with independent durable outcomes. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEARCH-001",
+      "area": "SEARCH",
+      "requirement": "Retain supported JSON, JSONB, array, and structured SQL values",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: retain supported json, jsonb, array, and structured sql values. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEARCH-002",
+      "area": "SEARCH",
+      "requirement": "Expose exact vector operations and complete indexed-vector integration",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose exact vector operations and complete indexed-vector integration. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEARCH-003",
+      "area": "SEARCH",
+      "requirement": "Expose full-text indexes, matching, ranking, and highlighting by capability",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose full-text indexes, matching, ranking, and highlighting by capability. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEARCH-004",
+      "area": "SEARCH",
+      "requirement": "Manage compatible custom types and approved extensions with effect policy",
+      "owner_document": "capability-matrix.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: manage compatible custom types and approved extensions with effect policy. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DATA-001",
+      "area": "DATA",
+      "requirement": "Validate and import dialect-compatible SQLite files or SQL dumps",
+      "owner_document": "api-and-cli.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: validate and import dialect-compatible sqlite files or sql dumps. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DATA-002",
+      "area": "DATA",
+      "requirement": "Transfer CSV and tabular JSON with exact mappings and native grants",
+      "owner_document": "api-and-cli.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: transfer csv and tabular json with exact mappings and native grants. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "DATA-003",
+      "area": "DATA",
+      "requirement": "Stream bounded checksummed uploads and authorized export artifacts",
+      "owner_document": "api-and-cli.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: stream bounded checksummed uploads and authorized export artifacts. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTH-001",
+      "area": "AUTH",
+      "requirement": "Authenticate local people, service principals, and agents",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: authenticate local people, service principals, and agents. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTH-002",
+      "area": "AUTH",
+      "requirement": "Issue scoped database, group, and platform credentials",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: issue scoped database, group, and platform credentials. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTH-003",
+      "area": "AUTH",
+      "requirement": "Expire, rotate, and revoke credentials without plaintext catalog storage",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expire, rotate, and revoke credentials without plaintext catalog storage. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTH-004",
+      "area": "AUTH",
+      "requirement": "Bound and invalidate login and execution sessions",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: bound and invalidate login and execution sessions. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTH-005",
+      "area": "AUTH",
+      "requirement": "Verify configured external JWT issuer, audience, signature, and key policy",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: verify configured external jwt issuer, audience, signature, and key policy. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTHZ-001",
+      "area": "AUTHZ",
+      "requirement": "Enforce resolved table and data-action grants in native execution",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce resolved table and data-action grants in native execution. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTHZ-002",
+      "area": "AUTHZ",
+      "requirement": "Enforce schema, role, and organization permissions",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce schema, role, and organization permissions. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTHZ-003",
+      "area": "AUTHZ",
+      "requirement": "Check indirect effects through triggers, views, cascades, and functions",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: check indirect effects through triggers, views, cascades, and functions. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTHZ-004",
+      "area": "AUTHZ",
+      "requirement": "Revalidate programs and streams on policy, schema, or generation changes",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: revalidate programs and streams on policy, schema, or generation changes. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "AUTHZ-005",
+      "area": "AUTHZ",
+      "requirement": "Enforce equivalent authority through HTTP, PG, CLI, dashboard, and MCP",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce equivalent authority through http, pg, cli, dashboard, and mcp. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEC-001",
+      "area": "SEC",
+      "requirement": "Require validated TLS and authentication for configured remote exposure",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: require validated tls and authentication for configured remote exposure. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEC-002",
+      "area": "SEC",
+      "requirement": "Apply origin, proxy, network, and rate-limit rules",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: apply origin, proxy, network, and rate-limit rules. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEC-003",
+      "area": "SEC",
+      "requirement": "Contain files, attachments, COPY, and extension access to approved resources",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: contain files, attachments, copy, and extension access to approved resources. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEC-004",
+      "area": "SEC",
+      "requirement": "Protect secret references and verify encryption across every artifact type",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: protect secret references and verify encryption across every artifact type. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SEC-005",
+      "area": "SEC",
+      "requirement": "Audit sensitive effects without leaking secrets or unauthorized data",
+      "owner_document": "security.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: audit sensitive effects without leaking secrets or unauthorized data. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "HIST-001",
+      "area": "HIST",
+      "requirement": "Retain native commit history before checkpoint truncation can lose it",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: retain native commit history before checkpoint truncation can lose it. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "HIST-002",
+      "area": "HIST",
+      "requirement": "Capture native-consistent complete multi-file snapshots",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: capture native-consistent complete multi-file snapshots. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "HIST-003",
+      "area": "HIST",
+      "requirement": "Publish immutable checksummed archive objects and manifests",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: publish immutable checksummed archive objects and manifests. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "HIST-004",
+      "area": "HIST",
+      "requirement": "Resolve times to retained complete revisions and expose gaps",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: resolve times to retained complete revisions and expose gaps. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BRANCH-001",
+      "area": "BRANCH",
+      "requirement": "Create independent current and historical database clones",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: create independent current and historical database clones. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BRANCH-002",
+      "area": "BRANCH",
+      "requirement": "Implement portable COW storage with immutable shared roots",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: implement portable cow storage with immutable shared roots. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BRANCH-003",
+      "area": "BRANCH",
+      "requirement": "Preserve lineage and compare branches without promising automatic merge",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: preserve lineage and compare branches without promising automatic merge. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-001",
+      "area": "REC",
+      "requirement": "Schedule and verify local or mounted-storage backups",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: schedule and verify local or mounted-storage backups. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-002",
+      "area": "REC",
+      "requirement": "Reconstruct a retained timestamp or revision without replaying incomplete commits",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: reconstruct a retained timestamp or revision without replaying incomplete commits. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-003",
+      "area": "REC",
+      "requirement": "Verify staged restores before atomic generation publication",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: verify staged restores before atomic generation publication. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-004",
+      "area": "REC",
+      "requirement": "Recover retained deleted databases under current policy",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: recover retained deleted databases under current policy. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-005",
+      "area": "REC",
+      "requirement": "Recover installation catalog and database metadata with explicit key custody",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: recover installation catalog and database metadata with explicit key custody. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "REC-006",
+      "area": "REC",
+      "requirement": "Collect only unreachable objects and report retention expiry effects",
+      "owner_document": "history-and-recovery.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: collect only unreachable objects and report retention expiry effects. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-001",
+      "area": "SYNC",
+      "requirement": "Serve authenticated multi-database self-hosted sync",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: serve authenticated multi-database self-hosted sync. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-002",
+      "area": "SYNC",
+      "requirement": "Bootstrap from consistent generation-bound snapshots",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: bootstrap from consistent generation-bound snapshots. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-003",
+      "area": "SYNC",
+      "requirement": "Push and pull compatible native changes with deduplication and conflicts",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: push and pull compatible native changes with deduplication and conflicts. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-004",
+      "area": "SYNC",
+      "requirement": "Resume cursors and handle generation changes and retention gaps",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: resume cursors and handle generation changes and retention gaps. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-005",
+      "area": "SYNC",
+      "requirement": "Treat sparse pages as bandwidth selection and require whole-generation download authority",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: treat sparse pages as bandwidth selection and require whole-generation download authority. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "SYNC-006",
+      "area": "SYNC",
+      "requirement": "Qualify PostgreSQL and legacy-client compatibility rather than assuming it",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: qualify postgresql and legacy-client compatibility rather than assuming it. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CHANGE-001",
+      "area": "CHANGE",
+      "requirement": "Install managed CDC on every permitted connection",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: install managed cdc on every permitted connection. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CHANGE-002",
+      "area": "CHANGE",
+      "requirement": "Publish authorized committed-change notifications",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: publish authorized committed-change notifications. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CHANGE-003",
+      "area": "CHANGE",
+      "requirement": "Resume bounded subscriptions with explicit gap signaling",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: resume bounded subscriptions with explicit gap signaling. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "CHANGE-004",
+      "area": "CHANGE",
+      "requirement": "Advertise live-query support only for verified query/dialect combinations",
+      "owner_document": "sync-and-changes.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: advertise live-query support only for verified query/dialect combinations. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-001",
+      "area": "OPS",
+      "requirement": "Persist jobs with leases, state transitions, events, and restart reconciliation",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: persist jobs with leases, state transitions, events, and restart reconciliation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-002",
+      "area": "OPS",
+      "requirement": "Retry or cancel only at defined safe operation boundaries",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: retry or cancel only at defined safe operation boundaries. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-003",
+      "area": "OPS",
+      "requirement": "Expose integrity, checkpoint, compaction, analyze, and GC operations",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose integrity, checkpoint, compaction, analyze, and gc operations. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-004",
+      "area": "OPS",
+      "requirement": "Measure Go and native resources, logs, queries, and audit activity",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: measure go and native resources, logs, queries, and audit activity. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-005",
+      "area": "OPS",
+      "requirement": "Enforce fair admission and operator budgets without vendor database quotas",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: enforce fair admission and operator budgets without vendor database quotas. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "OPS-006",
+      "area": "OPS",
+      "requirement": "Document upgrades, disk pressure, diagnostics, and whole-installation recovery",
+      "owner_document": "operations.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: document upgrades, disk pressure, diagnostics, and whole-installation recovery. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-001",
+      "area": "IFACE",
+      "requirement": "Provide complete browser administration through common services",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: provide complete browser administration through common services. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-002",
+      "area": "IFACE",
+      "requirement": "Provide a CLI client and machine-readable output",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: provide a cli client and machine-readable output. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-003",
+      "area": "IFACE",
+      "requirement": "Provide versioned administration and typed SQL-over-HTTP",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: provide versioned administration and typed sql-over-http. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-004",
+      "area": "IFACE",
+      "requirement": "Provide a qualified PostgreSQL endpoint and client guidance",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: provide a qualified postgresql endpoint and client guidance. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-005",
+      "area": "IFACE",
+      "requirement": "Provide MCP HTTP and an authenticated stdio proxy to the owner process",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: provide mcp http and an authenticated stdio proxy to the owner process. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "IFACE-006",
+      "area": "IFACE",
+      "requirement": "Publish client integration examples and capability negotiation",
+      "owner_document": "dashboard.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: publish client integration examples and capability negotiation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-001",
+      "area": "MCP",
+      "requirement": "Expose every public application operation as a named typed tool",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose every public application operation as a named typed tool. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-002",
+      "area": "MCP",
+      "requirement": "Filter discovery by principal scope and current capabilities",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: filter discovery by principal scope and current capabilities. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-003",
+      "area": "MCP",
+      "requirement": "Return useful typed bounded results and authorized resources",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: return useful typed bounded results and authorized resources. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-004",
+      "area": "MCP",
+      "requirement": "Expose durable jobs, result artifacts, events, and cancellation",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: expose durable jobs, result artifacts, events, and cancellation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-005",
+      "area": "MCP",
+      "requirement": "Allow owner agents full workflows without an additional mandatory approval gate",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: allow owner agents full workflows without an additional mandatory approval gate. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "MCP-006",
+      "area": "MCP",
+      "requirement": "Attribute all agent effects and follow the pinned MCP protocol semantics",
+      "owner_document": "mcp.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: attribute all agent effects and follow the pinned mcp protocol semantics. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BUILD-001",
+      "area": "BUILD",
+      "requirement": "Embed dashboard and docs in the application executable",
+      "owner_document": "build-and-release.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: embed dashboard and docs in the application executable. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BUILD-002",
+      "area": "BUILD",
+      "requirement": "Statically integrate the complete native bridge without runtime engine extraction",
+      "owner_document": "build-and-release.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: statically integrate the complete native bridge without runtime engine extraction. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BUILD-003",
+      "area": "BUILD",
+      "requirement": "Qualify each OS and architecture with exact native dependencies",
+      "owner_document": "build-and-release.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: qualify each os and architecture with exact native dependencies. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BUILD-004",
+      "area": "BUILD",
+      "requirement": "Publish reproducible build manifest, digests, licenses, and capability evidence",
+      "owner_document": "build-and-release.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: publish reproducible build manifest, digests, licenses, and capability evidence. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "BUILD-005",
+      "area": "BUILD",
+      "requirement": "Test offline operation, upgrades, and storage-format recovery boundaries",
+      "owner_document": "build-and-release.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: test offline operation, upgrades, and storage-format recovery boundaries. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-001",
+      "area": "TEST",
+      "requirement": "Compare SQL behavior against pristine SQLite and PostgreSQL oracles",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: compare sql behavior against pristine sqlite and postgresql oracles. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-002",
+      "area": "TEST",
+      "requirement": "Test authorization bypasses and dynamic policy invalidation",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: test authorization bypasses and dynamic policy invalidation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-003",
+      "area": "TEST",
+      "requirement": "Test ABI layout, lifetime, values, cancellation, and I/O yields",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: test abi layout, lifetime, values, cancellation, and i/o yields. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-004",
+      "area": "TEST",
+      "requirement": "Test independent concurrent sessions and many dormant/active databases",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: test independent concurrent sessions and many dormant/active databases. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-005",
+      "area": "TEST",
+      "requirement": "Inject crashes and storage failures into lifecycle, history, backup, and restore",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: inject crashes and storage failures into lifecycle, history, backup, and restore. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    },
+    {
+      "id": "TEST-006",
+      "area": "TEST",
+      "requirement": "Verify interface parity, footprint, client compatibility, and release evidence",
+      "owner_document": "testing-and-acceptance.md",
+      "status": "required; not verified by documentation",
+      "acceptance": "Demonstrate: verify interface parity, footprint, client compatibility, and release evidence. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance_document": "testing-and-acceptance.md"
+    }
+  ]
+}

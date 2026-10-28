@@ -33,6 +33,8 @@
 
 ## About
 
+This fork also contains the proposed **Mira standalone Go database platform** specification: [read the complete design](docs/standalone/README.md). It covers self-hosted multi-database operation, SQLite and PostgreSQL frontends, full MCP access, implementation contracts, and an audit pinned to upstream source. The platform described there is proposed work; the upstream engine and tools below retain their existing identities.
+
 Turso is an in-process SQL database written in Rust, compatible with SQLite. It runs in production today at multiple organizations.
 
 Turso is also a virtual machine. Like SQLite, it compiles SQL into bytecode for that machine, the VDBE, and then runs the bytecode. That design is what lets one engine host more than one SQL dialect. SQLite is the first and primary frontend that compiles to it, and Postgres is now a frontend of its own, with its own dialect and wire protocol. More will follow. Our goal is to be for databases what LLVM is to compilers, with one modern and reliable core, and many frontends compiled down onto it.
