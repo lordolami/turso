@@ -6,7 +6,7 @@ These workstreams organize dependencies for the complete agreed standalone produ
 
 ~~~mermaid
 flowchart TD
-  S[Scope and source audit] --> B[Static native bridge and capability model]
+  S[Scope and source audit] --> B[Go binding extensions and capability model]
   B --> A[Native authorization and identity context]
   B --> H[Native history and snapshot integration]
   B --> P[PostgreSQL frontend bridge]
@@ -25,9 +25,9 @@ flowchart TD
 
 ## W1: Repository and native dependency discipline
 
-Maintain origin fork/upstream remotes, pin audited revisions, preserve licenses, record patches, and separate native engine changes from Go product code. Add the proposed combined native bridge without forking existing SQL parser semantics into Go. Generate version/feature/format manifests and ABI layout checks. Complete per-platform static-link qualification.
+Maintain origin fork/upstream remotes, pin audited revisions, preserve licenses, record patches, and separate native engine changes from Go product code. Reuse the existing Go/native binding and add the smallest necessary native extensions without forking SQL parser semantics into Go. Generate version/feature/format manifests and ABI layout checks. Qualify bundled engine loading per platform; compare an optional static adapter using full-feature size/startup/memory measurements.
 
-Outputs: build graph, generated header, combined native archive, cgo adapter, build manifest, native ownership tests. Acceptance: BUILD and native TEST requirements.
+Outputs: build graph, necessary ABI declarations/Go wrappers, complete target-native payload, hardened automatic loader, build manifest, native ownership tests, and measured footprint evidence. Acceptance: BUILD and native TEST requirements.
 
 ## W2: PostgreSQL as a first-class integration
 

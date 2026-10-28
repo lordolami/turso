@@ -16,7 +16,7 @@ This package specifies proposed software. Validation checks the documents and co
 | Check | Result |
 |---|---|
 | Documentation checker | Passed |
-| Markdown chapters/index/report | 26 documents; approximately 27,000 words excluding this report |
+| Markdown chapters/index/report | 26 documents; over 27,000 words excluding this report |
 | Local documentation links | 65 checked, including report links |
 | JSON parsing and duplicate-key rejection | 7 JSON files passed |
 | Operation contracts | 170 unique operations with HTTP/CLI/MCP/dashboard mappings, permissions, schema references, jobs, and retry contracts |
@@ -49,6 +49,8 @@ git diff --cached --check
 The documentation checks ran on Windows using the bundled Python runtime. The C/C++ checks used the installed GCC tools. Exact reproducibility of a future product binary requires the separately specified pinned build pipeline; these checks produce no Mira executable.
 
 ## Not established by this change
+
+The follow-up packaging review corrected an assistant-added restriction: one downloadable executable does not require a custom statically linked cgo bridge or forbid automatic native-library extraction. The documents now prefer reusing/extending the Go binding and its bundled native loading route. The loader was inspected at the platform-libs revision pinned by the audited Go module, through the GitHub contents API. No full-feature executable or footprint measurement was produced by this correction. The documentation checker and C/C++ header syntax checks were repeated after the change.
 
 No Go application skeleton, native bridge implementation, engine authorization patch, archive writer, snapshot/COW system, production PostgreSQL endpoint, or full MCP server has been implemented here. No native/Go product build, upstream Rust/Go runtime suite, PostgreSQL differential suite, crash-recovery experiment, security acceptance suite, or performance benchmark is claimed as passed. No binary-size, RAM, throughput, universal PostgreSQL parity, or production-readiness claim is made.
 

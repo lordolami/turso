@@ -4,6 +4,8 @@
 
 Distribute one executable per qualified OS/architecture. The operator does not install Go, Cargo, Node, an external database daemon, or downloaded engine libraries to run it. Build tools are developer/release inputs. Persistent data and optional certificate/key files are ordinary installation files created or supplied after download.
 
+The default binding integration can automatically extract its bundled native library into a private, versioned cache before loading it in process. This is not a separate engine installation or a second server. Cache contents can be recreated from the executable; live engine handles must be closed before deleting/replacing an in-use library, particularly on Windows. Startup requires a qualified writable cache location. Document and measure this runtime disk footprint instead of promising literal zero additional files.
+
 The product can run on a laptop, bare metal, dedicated server, or VPS. A single instance may serve remote applications, multiple teammates, and many databases. It remains one server process owning one installation directory.
 
 ## Configuration source and precedence

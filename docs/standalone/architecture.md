@@ -55,7 +55,7 @@ product/
   internal/transport/mcp/
   internal/transport/control/ Unix socket or Windows named pipe
   internal/ui/                embedded dashboard and help assets
-  native/mira-engine/         new static C-ABI bridge crate
+  native/mira-engine/         minimal native API extensions and build integration
   native/include/             generated, versioned public C headers
   sdk/go/                    embedding/client adapter, distributed separately
   web/                       dashboard source and locked build dependencies

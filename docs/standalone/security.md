@@ -60,6 +60,8 @@ Jobs record the initiating principal/credential and reauthorize at execution and
 
 The owner may configure additional local directories through explicit platform settings. These changes require owner authority and audit, not an automatic per-command interactive confirmation requirement. OS canonicalization and opened-file identity checks prevent traversal and reparse races.
 
+Bundled native loading uses a protected per-account cache with full build/digest identity, atomic extraction and digest verification, safe concurrent initialization, and explicit native ABI matching. User SQL/MCP cannot choose an arbitrary library path or switch loading to a system search path. Test cache corruption, symlink/reparse substitution, interrupted extraction, concurrent starts, DLL search behavior, and permission failures. The source loader is a starting point; its presence is not evidence these product hardening requirements have passed.
+
 ## Network exposure
 
 Default application and PostgreSQL addresses are loopback. Operators may expose them on bare metal/VPS/private networks using explicit configuration. Validate listen addresses, trusted reverse proxies, TLS certificates, origin rules, and IP allow rules at startup/reload. Host/Origin headers cannot select an unauthorized instance or bypass MCP authentication.

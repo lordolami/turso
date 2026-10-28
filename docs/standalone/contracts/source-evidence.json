@@ -268,8 +268,8 @@
   ],
   "external_sources": [
     {
-      "url": "https://github.com/tursodatabase/turso-go-platform-libs/blob/main/load_turso.go",
-      "observation": "Inspected external loader embeds/extracts shared libraries; not pinned source in this checkout."
+      "url": "https://github.com/tursodatabase/turso-go-platform-libs/blob/57d6c2f7db38/load_turso.go",
+      "observation": "Loader pinned by the audited Go module bundles/extracts a native library and verifies SHA-256; checked through the GitHub contents API. External source is not covered by local checkout hashes."
     },
     {
       "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports",

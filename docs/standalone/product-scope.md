@@ -58,7 +58,7 @@ The positioning phrase is **a database LLVM that scales with you**. Within this 
 | Operations | Durable jobs; leases for workers within the process; retries/cancellation; maintenance; audit; observability; storage/resource limits | OPS-001..006 |
 | Interfaces | Browser dashboard; CLI; HTTP administration; SQL-over-HTTP; PostgreSQL endpoint; MCP stdio proxy and HTTP endpoint; supporting client packages | IFACE-001..006 |
 | MCP | Complete operation registry; principal-filtered discovery; typed schemas; useful structured results; durable jobs/resources; cancellation; audit attribution | MCP-001..006 |
-| Delivery | Embedded UI/docs; native static integration; per-platform artifacts; reproducible version manifest; notices; upgrade/recovery instructions | BUILD-001..005 |
+| Delivery | Embedded UI/docs and matching native engine; automatic loading; per-platform artifacts; reproducible version manifest; notices; upgrade/recovery instructions | BUILD-001..005 |
 | Verification | Differential SQL tests; policy adversarial tests; ABI checks; multi-client isolation; crash/restore tests; many-database resource tests; interface parity | TEST-001..006 |
 
 The exact requirement records, acceptance obligations, and owning chapters are in [requirements.json](contracts/requirements.json). Requirements cover product behavior rather than every internal function name.

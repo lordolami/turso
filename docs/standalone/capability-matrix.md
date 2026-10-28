@@ -10,8 +10,8 @@ This table separates the **product target** from **upstream implementation**. Ex
 | PostgreSQL AST/frontend | Present, experimental/partial | Native ABI, Go session owner, compatibility reporting, and tests |
 | PostgreSQL wire endpoint | Reference server present | Go listener, TLS, authentication, routing to many databases, session isolation, cancellation |
 | Database dialect | Fixed at open; registry enforces identity | Persist immutable dialect and reject mismatched connection requests |
-| Go database/sql driver | Present; SQLite SDK path | Reuse API experience where appropriate, implement static/native product bridge |
-| Strict single executable | Core/sync static libraries can be built; current Go loader extracts a library | Combined native build, static cgo integration, per-platform dependency inspection |
+| Go database/sql driver | Present; SQLite SDK path | Reuse the binding; extend native/Go APIs for PG and missing engine hooks |
+| One downloadable executable | Current Go loader embeds and automatically extracts a native library; static outputs also exist | Package matching complete native payload, harden automatic loading, measure footprint; static cgo is optional |
 | SQL CRUD, joins, constraints, functions | Substantial support, differences by dialect | Surface exact supported subset, typed values, cancellation, authorization |
 | Views/materialized views | Available with feature/runtime conditions | Capability checks, invoker authorization, history/restore compatibility |
 | Triggers | SQLite surface supported; PostgreSQL triggers absent in current matrix | Correct dialect reporting and indirect-action authorization |

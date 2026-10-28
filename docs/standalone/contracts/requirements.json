@@ -1030,10 +1030,10 @@
     {
       "id": "BUILD-002",
       "area": "BUILD",
-      "requirement": "Statically integrate the complete native bridge without runtime engine extraction",
+      "requirement": "Bundle the complete matching native engine with automatic verified loading and no separate installation",
       "owner_document": "build-and-release.md",
       "status": "required; not verified by documentation",
-      "acceptance": "Demonstrate: statically integrate the complete native bridge without runtime engine extraction. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
+      "acceptance": "Demonstrate: bundle the complete matching native engine with automatic verified loading and no separate installation. Record normal, denied/unsupported, concurrent, and failure/restart outcomes where applicable; verify interface parity and retain evidence.",
       "acceptance_document": "testing-and-acceptance.md"
     },
     {

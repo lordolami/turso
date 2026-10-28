@@ -6,6 +6,8 @@ The product targets PocketBase-like download-and-run simplicity and an efficient
 
 Measure the actual combined executable and process. Go heap metrics alone omit native page caches, MVCC versions, extension allocations, and some thread stacks. A Go memory limit is not a whole-process/native memory limit.
 
+Source-repository size is not a runtime measurement. A dependency fork, its examples, tests, and other language bindings do not automatically become part of the linked/embedded release. Conversely, importing a small Go wrapper still includes its selected native payload. Compare executable/download bytes, materialized library/cache bytes, cold and warm startup, idle RSS, active native memory, threads, and handles for the actual full feature set. Static linking and embedded-library loading must be evaluated by those same measures; neither is a synonym for lightweight.
+
 ## Many databases
 
 Distinguish cataloged databases, open native database holders, live connections, active statements, active transactions, and pinned storage generations. A user can create many cataloged databases without keeping them all open. Database count has no vendor cap; ordinary hardware limits and optional owner policies still apply.

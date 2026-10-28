@@ -1,6 +1,8 @@
 /* PROPOSED ABI contract v1, not implemented by this documentation.
- * Product API, not an upstream Turso header. Generate/check native+cgo layouts.
- * One shared combined archive contains SQLite+PostgreSQL+sync dependencies.
+ * Product API, not an upstream Turso header. Generate/check native+Go FFI layouts.
+ * Reuse existing turso_* symbols where equivalent; these declarations illustrate
+ * required semantics and do not require redundant wrappers or static linking.
+ * One target-native payload shares SQLite+PostgreSQL+sync engine dependencies.
  * All calls serialize a given session/statement except mira_interrupt().
  * Native copies input bytes during the call; it never retains Go pointers.
  * Output buffers are native-owned and freed with mira_buffer_free().

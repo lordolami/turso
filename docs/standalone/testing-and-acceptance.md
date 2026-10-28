@@ -59,7 +59,7 @@ cargo test -p core_tester --test leak_tests
 
 These are upstream development commands, not commands run successfully by this documentation change. PostgreSQL comparison requires a real reference server or its documented Docker harness. Do not alter pristine upstream .sql/.out files merely to make the fork pass.
 
-Core native changes add regressions to existing SQL/integration/simulator harnesses and run required formatting/lint checks for the files actually changed. The Go application additionally needs service, transport, cgo lifetime, and end-to-end tests. Race detectors do not automatically observe every native race; use native sanitizers/instrumentation where supported.
+Core native changes add regressions to existing SQL/integration/simulator harnesses and run required formatting/lint checks for the files actually changed. The Go application additionally needs service, transport, FFI lifetime, loader/extraction, and end-to-end tests; any optional cgo adapter receives its own qualification. Race detectors do not automatically observe every native race; use native sanitizers/instrumentation where supported.
 
 ## Failure injection
 

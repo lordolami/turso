@@ -60,8 +60,8 @@ These contracts describe what to implement. They are not generated documentation
 - **Generation:** a concrete storage incarnation of a database; restore replaces a generation without silently reusing old sessions.
 - **Session:** a principal-bound, database-generation-bound execution context.
 - **Job:** a durable platform operation that can outlive a request.
-- **Native:** compiled database code linked into the Go executable; the product is not a rewrite of Turso in Go.
-- **One file:** one application executable to distribute. Persistent data, optional operator-supplied certificates, and backups are separate files.
+- **Native:** compiled database code packaged with the Go application and loaded in its process; the product is not a rewrite of Turso in Go.
+- **One file:** one application executable to distribute. Persistent data, automatically materialized native-library cache, optional operator-supplied certificates, and backups are separate runtime files. No-extraction static linking is not a user requirement.
 - **No database-count cap:** the product imposes no commercial count limit. Bounded active handles and ordinary machine limits still apply.
 - **Target / proposed:** a requirement or design we must implement and verify.
 - **Observed:** a behavior or symbol inspected in the audited upstream source. A source inspection is not a passed runtime test.

@@ -2,11 +2,13 @@
 
 ## Decision
 
-Use a product-owned, versioned C ABI and a small cgo adapter. Link the combined native archive into the Go executable. Reuse upstream Rust engine/frontend code directly. Go does not reimplement the SQL parser, PostgreSQL AST translator, B-tree, VDBE, or MVCC engine.
+Use the existing Go binding and its purego/native ABI loading path as the integration starting point. Preserve existing database operations where their semantics meet the product contract. Add versioned native symbols and Go wrappers for capabilities the binding does not expose, including actual PostgreSQL sessions, resolved authorization, consistent snapshots, and retained history. Reuse upstream Rust engine/frontend code directly. Go does not reimplement the SQL parser, PostgreSQL AST translator, B-tree, VDBE, or MVCC engine.
 
-The current Go package is useful reference material but does not expose PostgreSQL or the additional authorization/history boundaries. Its default native loader extracts a shared library. The product requires a build path that meets the single-executable contract without that extraction. Existing staticlib support is a building block, not a proof that the combined product links on every OS.
+The audited Go package loads a bundled native library into its own process. Users can download one executable while that executable automatically materializes its embedded engine library in a protected cache. The user did not require a no-extraction executable. A custom statically linked cgo bridge is an optional build alternative to compare, not a confirmed product requirement and not evidence of a smaller footprint.
 
-The proposed declaration is [mira_engine.h](contracts/mira_engine.h). All mira_* names in this chapter are proposed symbols. None is claimed to exist upstream.
+Build and embed only the target platform's complete engine/frontend payload, with matching source revision, symbols, ABI, and checksums. Reuse the engine code once across SQLite, PostgreSQL, and sync. This is one Go server process with in-process native execution, not a second engine daemon. Retain the full feature scope when comparing builds. The engine fork remains a development/build dependency; upstream tests, examples, language SDKs, and source history are not shipped inside the executable.
+
+The proposed declaration is [mira_engine.h](contracts/mira_engine.h). All mira_* names in this chapter are proposed symbols. None is claimed to exist upstream. It specifies required ownership/value/effect semantics; reuse existing turso_* entry points where equivalent rather than implementing a redundant wrapper for every ordinary SQLite call. The final minimal extension surface is established by the implementation audit and ABI tests.
 
 ## Bridge objects
 
@@ -44,14 +46,14 @@ Preserve NULL, signed int64, finite/non-finite floating-point values, UTF-8 text
 
 A returned row owns or borrows its bytes according to the ABI operation, never according to a guessed pointer lifetime. Borrowed values expire at the next step/reset/finalize; Go copies them before that event. Bind input buffers remain valid until the bridge copies them; the ABI promises to copy during the call. Allocation limits apply before copying a large value.
 
-No Go pointer containing Go pointers is retained by native code. Use cgo.Handle or a native-owned context token for callbacks, and keep release callbacks paired with registration. A callback must not reenter the same connection, call arbitrary application code while holding an engine lock, or block on a Go worker that is waiting for that native call.
+No Go pointer containing Go pointers is retained by native code. Use native-owned context tokens or a tested Go handle table for callbacks; the optional cgo adapter may use cgo.Handle. Keep release callbacks paired with registration. A callback must not reenter the same connection, call arbitrary application code while holding an engine lock, or block on a Go worker that is waiting for that native call. Qualify the selected purego callback mechanism and OS/architecture restrictions explicitly.
 
 ## Struct and ABI rules
 
 - Every extensible configuration/result struct starts with size and abi_version.
 - Use fixed-width integer fields for wire-independent values; declare pointer/length byte slices explicitly.
 - Unknown mandatory flags return unsupported; trailing optional fields can be ignored only under the documented version rule.
-- Generate and compare headers; verify sizeof/alignof/offsetof and enum values in native and cgo builds.
+- Generate and compare headers; verify sizeof/alignof/offsetof and enum values against Go FFI layouts and, if selected, cgo builds.
 - Include a runtime build manifest digest. Refuse loading an incompatible archive/header combination.
 - Keep ownership APIs named by action: retain, release, buffer_free. Do not overload close to mean both SQL close and allocation deallocation.
 

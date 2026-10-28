@@ -19,7 +19,7 @@ These are concrete design recommendations based on inspected source. They remain
 
 | Decision | Proposal | Evidence/gate |
 |---|---|---|
-| DEC-009: Native static bridge | New combined versioned C ABI linked through cgo; Go owns product services/networking | SDK staticlib declarations; qualify complete combined artifact and dependencies |
+| DEC-009: Reuse and extend Go bindings | Prefer the existing purego/bundled native loading route; add missing native APIs; static cgo remains an optional measured alternative | Pinned Go loader already bundles its engine; no-extraction/static linking was an assistant-added restriction, not a user requirement |
 | DEC-010: Fixed database dialect | Persist immutable provider/dialect; no arbitrary per-request parser switching on one file | core Dialect and registry enforce fixed identity |
 | DEC-011: Identity/recovery | Private catalog, per-principal credentials, local bootstrap and OS-authorized owner recovery | Specify recovery material/key custody and test local trust boundaries |
 | DEC-012: Engine authorization | Generic resolved-action hook and immutable native policy context | Existing sqlite3_set_authorizer refuses because core hook is absent |
@@ -34,8 +34,8 @@ These are concrete design recommendations based on inspected source. They remain
 
 ## Unresolved details that must be settled in code
 
-1. Exact native archive composition and symbol/export strategy that includes PG parser/frontend, sync, FTS, encryption, and required extensions without duplicate runtimes.
-2. Static-link qualification of each requested target, especially PostgreSQL grammar and native crypto/compiler requirements on Windows.
+1. Exact native payload composition and minimal symbol/export strategy that includes PG parser/frontend, sync, FTS, encryption, and required extensions without duplicate engine code.
+2. Full-feature Go/native build and loader qualification per target; compare static linking only where justified, especially PostgreSQL grammar and native crypto/compiler requirements on Windows.
 3. Complete authorizer event/action model, invoker semantics, runtime dynamic effects, and prepared-plan revocation behavior.
 4. Snapshot/history archive ordering for WAL and MVCC and coordinated PG schema bundles, including crash recovery between native commit and archive publication.
 5. Portable COW I/O semantics and whether some target filesystems need a qualified fallback while retaining honest capability reporting.

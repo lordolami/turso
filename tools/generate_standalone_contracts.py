@@ -331,7 +331,7 @@ REQUIREMENTS = {
         "Attribute all agent effects and follow the pinned MCP protocol semantics"]),
     "BUILD": ("build-and-release.md", [
         "Embed dashboard and docs in the application executable",
-        "Statically integrate the complete native bridge without runtime engine extraction",
+        "Bundle the complete matching native engine with automatic verified loading and no separate installation",
         "Qualify each OS and architecture with exact native dependencies",
         "Publish reproducible build manifest, digests, licenses, and capability evidence",
         "Test offline operation, upgrades, and storage-format recovery boundaries"]),
@@ -579,7 +579,7 @@ def make_evidence() -> None:
         "hash_normalization": "UTF-8 text with CRLF/CR normalized to LF, for cross-platform checkout verification",
         "method": "source inspection; not a runtime test", "records": records,
         "external_sources": [
-            {"url": "https://github.com/tursodatabase/turso-go-platform-libs/blob/main/load_turso.go", "observation": "Inspected external loader embeds/extracts shared libraries; not pinned source in this checkout."},
+            {"url": "https://github.com/tursodatabase/turso-go-platform-libs/blob/57d6c2f7db38/load_turso.go", "observation": "Loader pinned by the audited Go module bundles/extracts a native library and verifies SHA-256; checked through the GitHub contents API. External source is not covered by local checkout hashes."},
             {"url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports", "observation": "Versioned MCP transport semantics; use a qualified SDK rather than copying the CLI server."},
             {"url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools", "observation": "Versioned tool schema and result semantics."},
             {"url": "https://github.com/modelcontextprotocol/go-sdk", "observation": "Official Go SDK; exact implementation dependency must be pinned and qualified."},
